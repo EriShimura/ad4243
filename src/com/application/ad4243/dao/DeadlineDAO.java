@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import com.application.ad4243.model.DeadLine;
 import com.application.ad4243.model.User;
+import javax.jdo.*;
 
 /**
  *
@@ -27,7 +28,10 @@ public class DeadlineDAO {
         ArrayList<DeadLine> deadlineList = new ArrayList<DeadLine>();
         DeadLine deadline = null;
         Connection conn = null;
+        PersistenceManagerFactory factory = PMF.get();
+        PersistenceManager manager = factory.getPersistenceManager();
         try{
+        	manager.makePersistent(nowUser);
             Class.forName("org.apache.derby.jdbc.ClientDriver");
             conn = DriverManager.getConnection("jdbc:derby://localhost:1527/db4243");
             
