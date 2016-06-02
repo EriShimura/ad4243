@@ -5,14 +5,54 @@ xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
 http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	<servlet>
-		<servlet-name>Ad4243</servlet-name>
-		<servlet-class>com.application.ad4243.Ad4243Servlet</servlet-class>
+		<servlet-name>WelcomeServlet</servlet-name>
+		<servlet-class>com.application.ad4243.servlet.WelcomeServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>Ad4243</servlet-name>
-		<url-pattern>/ad4243</url-pattern>
+		<servlet-name>WelcomeServlet</servlet-name>
+		<url-pattern>/WelcomeServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>RegistServlet</servlet-name>
+		<servlet-class>com.application.ad4243.servlet.RegistServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>RegistServlet</servlet-name>
+		<url-pattern>/RegistServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>MainServlet</servlet-name>
+		<servlet-class>com.application.ad4243.servlet.MainServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MainServlet</servlet-name>
+		<url-pattern>/MainServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>LoginServlet</servlet-name>
+		<servlet-class>com.application.ad4243.servlet.LoginServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LoginServlet</servlet-name>
+		<url-pattern>/LoginServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>LogoutServlet</servlet-name>
+		<servlet-class>com.application.ad4243.servlet.LogoutServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LogoutServlet</servlet-name>
+		<url-pattern>/LogoutServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>GachaServlet</servlet-name>
+		<servlet-class>com.application.ad4243.servlet.GachaServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>GachaServlet</servlet-name>
+		<url-pattern>/GachaServlet</url-pattern>
 	</servlet-mapping>
 	<welcome-file-list>
-		<welcome-file>index.html</welcome-file>
+		<welcome-file>/WelcomeServlet</welcome-file>
 	</welcome-file-list>
 </web-app>
