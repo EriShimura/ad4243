@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.application.ad4243.model.Card;
 
+import javax.jdo.*;
+
 /**
  *
  * @author g13943se
@@ -17,7 +19,8 @@ import com.application.ad4243.model.Card;
 public class SetCardDAO {
     public boolean setNewCard(HttpServletRequest request, HttpServletResponse response, Card newCard, int owner)
             throws ServletException, IOException {
-        Connection conn = null;
+        /*
+       	Connection conn = null;
         try{
             Class.forName("org.apache.derby.jdbc.ClientDriver");
             String driverURL = "jdbc:derby://localhost:1527/db4243";
@@ -47,6 +50,17 @@ public class SetCardDAO {
                 }
             }
         }
+        */
+    	
+    	PersistenceManagerFactory factory = PMF.get();
+    	PersistenceManager manager = factory.getPersistenceManager();
+    	try{
+    		Card card = (Card) manager.getObjectById(newCard.getCardName());
+    		card.setCardOwner(owner);
+    	}finally{
+    		manager.close();
+    	}
+    	
         return true;
     }
 }
