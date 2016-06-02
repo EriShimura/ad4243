@@ -13,6 +13,8 @@ import javax.servlet.http.HttpSession;
 import com.application.ad4243.model.Login;
 import com.application.ad4243.model.User;
 
+import javax.jdo.*;
+
 /**
  *
  * @author g13943se
@@ -20,8 +22,11 @@ import com.application.ad4243.model.User;
 public class UserDAO {
     public User findByLogin(Login login,HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Connection conn = null;
+    	// Connection conn = null;
         User user = null;
+        //////////////////////
+        /* software
+        //////////////////////
         try{
             Class.forName("org.apache.derby.jdbc.ClientDriver");
             conn = DriverManager.getConnection("jdbc:derby://localhost:1527/db4243");
@@ -61,6 +66,16 @@ public class UserDAO {
                 }
             }
         }
+        */
+        
+        PersistenceManagerFactory factory = PMF.get();
+        PersistenceManager manager = factory.getPersistenceManager();
+        try{
+        	user = (User) manager.getObjectById(login.getUserName());
+        }finally{
+        	manager.close();
+        }
+        
         return user;
     }
 }

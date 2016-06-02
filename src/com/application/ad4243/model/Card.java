@@ -26,4 +26,5 @@ public class Card {
    public String getCardDetails(){ return cardDetails; }
    public String getCardAddress(){ return cardAddress; }
    public String getCardOwner(){ return cardOwner; }
+   public void setCardOwner(int owner){ cardOwner += " " + String.valueOf(owner); }
 }
