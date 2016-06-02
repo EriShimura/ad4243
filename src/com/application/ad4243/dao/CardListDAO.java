@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import com.application.ad4243.model.Card;
 import com.application.ad4243.model.User;
-import org.apache.tomcat.dbcp.dbcp.DelegatingPreparedStatement;
+//import org.apache.tomcat.dbcp.dbcp.DelegatingPreparedStatement;
 
 /**
  *
