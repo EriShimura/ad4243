@@ -5,7 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="model.User"%>
+<%@page import="com.application.ad4243.model.User"%>
 <%
     User user = (User) session.getAttribute("user");
 %>

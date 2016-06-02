@@ -15,7 +15,9 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class RegistDAO {
     public boolean registUser(String pass,String userName){
-        Connection conn = null;
+    	
+    	
+        /*Connection conn = null;
         try{
             Class.forName("org.apache.derby.jdbc.ClientDriver");
             String driverURL = "jdbc:derby://localhost:1527/db4243";
@@ -43,7 +45,7 @@ public class RegistDAO {
                     e.printStackTrace();
                 }
             }
-        }
+        }*/
         return true;
     }
 }

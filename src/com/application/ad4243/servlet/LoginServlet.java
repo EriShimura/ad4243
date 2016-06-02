@@ -54,7 +54,7 @@ public class LoginServlet extends HttpServlet {
         LoginLogic bo = new LoginLogic();
         boolean result = bo.execute(login,request,response);
         
-        if(result){
+        if(result){ 
             HttpSession session = request.getSession();
             session.setAttribute("userName",userName);
             
