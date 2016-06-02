@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import com.application.ad4243.model.Card;
 import com.application.ad4243.model.User;
+import javax.jdo.*;
 
 /**
  *
@@ -25,6 +26,8 @@ public class AllCardListDAO {
         ArrayList<Card> allCard = new ArrayList<Card>();
         Card card = null;
         Connection conn = null;
+        PersistenceManagerFactory factory = PMF.get();
+        PersistenceManager manager = factory.getPersistenceManager();
         try{
             Class.forName("org.apache.derby.jdbc.ClientDriver");
             conn = DriverManager.getConnection("jdbc:derby://localhost:1527/db4243");
@@ -33,6 +36,7 @@ public class AllCardListDAO {
             PreparedStatement pStmt = conn.prepareStatement(sql);
             
             ResultSet rs = pStmt.executeQuery();
+            
             while(rs.next()){
                 card = new Card(rs.getInt("CARD_ID"),rs.getInt("CARD_RARITY"),
                         rs.getString("CARD_NAME"),rs.getString("CARD_DETAILS"),
