@@ -3,6 +3,8 @@ package com.application.ad4243.model;
 import java.sql.Date;
 import javax.jdo.annotations.*;
 
+import com.google.appengine.api.search.query.QueryParser.primitive_return;
+
 /**
  *
  * @author g13943se
@@ -11,6 +13,10 @@ import javax.jdo.annotations.*;
 public class DeadLine {
 	
 	@PrimaryKey
+	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
+	long deadlineId;
+	
+	@Persistent
     int userId;
 	
 	@Persistent
@@ -23,6 +29,7 @@ public class DeadLine {
         this.userId = userId;
         this.deadline = deadline;
         this.details = details;
+        deadlineId = userId * (int) details.charAt(0); // wei!!!!!!
     }
     public String getDetails(){ return details; }
 }

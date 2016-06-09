@@ -9,6 +9,7 @@ import javax.jdo.annotations.*;
 @PersistenceCapable(identityType =IdentityType.APPLICATION)
 public class User {
 	@PrimaryKey
+	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
    private int userId;
 	
 	@Persistent

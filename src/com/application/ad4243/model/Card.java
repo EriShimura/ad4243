@@ -9,7 +9,8 @@ import javax.jdo.annotations.*;;
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
 public class Card {
 	@PrimaryKey
-   int cardId;
+	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
+   long cardId;
 	
 	@Persistent
    int cardRarity;
@@ -26,7 +27,7 @@ public class Card {
 	@Persistent
    String cardOwner;
 	
-   public Card(int cardId, int cardRarity, String cardName,
+   public Card(long cardId, int cardRarity, String cardName,
            String cardDetails,String cardAddress,String cardOwner){
        this.cardId = cardId;
        this.cardRarity = cardRarity;
@@ -35,7 +36,7 @@ public class Card {
        this.cardAddress = cardAddress;
        this.cardOwner = cardOwner;
    }
-   public int getCardId(){ return cardId; }
+   public long getCardId(){ return cardId; }
    public int getCardRarity(){ return cardRarity; }
    public String getCardName(){ return cardName; }
    public String getCardDetails(){ return cardDetails; }
