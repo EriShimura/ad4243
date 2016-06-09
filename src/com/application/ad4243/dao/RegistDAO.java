@@ -56,7 +56,7 @@ public class RegistDAO {
     	PersistenceManagerFactory factory = PMF.get();
     	PersistenceManager manager = factory.getPersistenceManager();
     	try{
-    		User registUser = new User(PMF.getNextUserId(), userName, pass, 0);
+    		User registUser = new User(PMF.getNextUserId(), pass, userName, 0);
     		manager.makePersistent(registUser);
     	}finally{
     		manager.close();
