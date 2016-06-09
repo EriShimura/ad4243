@@ -12,4 +12,11 @@ public class PMF {
     public static PersistenceManagerFactory get(){
         return factory;
     }
+    
+    ///////////////////////////////////////
+    // PMFと全然関係ないけどUserNoをここで管理
+    ///////////////////////////////////////
+    
+    private static int userId;
+    public static int getNextUserId(){ return userId++; }
 }

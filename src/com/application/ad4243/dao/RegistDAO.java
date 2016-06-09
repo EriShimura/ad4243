@@ -5,9 +5,15 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+
+import javax.jdo.PersistenceManagerFactory;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.application.ad4243.model.User;
+
+import javax.jdo.*;
 
 /**
  *
@@ -46,6 +52,16 @@ public class RegistDAO {
                 }
             }
         }*/
+    	
+    	PersistenceManagerFactory factory = PMF.get();
+    	PersistenceManager manager = factory.getPersistenceManager();
+    	try{
+    		User registUser = new User(PMF.getNextUserId(), userName, pass, 0);
+    		manager.makePersistent(registUser);
+    	}finally{
+    		manager.close();
+    	}
+    	
         return true;
     }
 }

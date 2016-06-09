@@ -5,7 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="model.Card"%>
+<%@page import="com.application.ad4243.model.Card"%>
 <%
     Card newCard = (Card) request.getAttribute("newCard");
 %>

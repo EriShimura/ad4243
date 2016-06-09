@@ -6,7 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.ArrayList" %>
-<%@page import="model.DeadLine" %>
+<%@page import="com.application.ad4243.model.DeadLine" %>
 <%
     ArrayList<DeadLine> deadlineList = (ArrayList<DeadLine>)session.getAttribute("deadlineList");
 %>

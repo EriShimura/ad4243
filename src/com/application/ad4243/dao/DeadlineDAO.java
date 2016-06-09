@@ -7,7 +7,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.*;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,18 +21,18 @@ import javax.jdo.*;
  * @author g13943se
  */
 public class DeadlineDAO {
-    public ArrayList<DeadLine> findAllThings(HttpServletRequest request, HttpServletResponse response)
+    public List<DeadLine> findAllThings(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         User nowUser = (User) session.getAttribute("user");
-        ArrayList<DeadLine> deadlineList = new ArrayList<DeadLine>();
-        DeadLine deadline = null;
-        Connection conn = null;
+        List<DeadLine> deadlineList = new ArrayList<DeadLine>();
+        //DeadLine deadline = null;
+        //Connection conn = null;
         PersistenceManagerFactory factory = PMF.get();
         PersistenceManager manager = factory.getPersistenceManager();
         try{
-        	manager.makePersistent(nowUser);
-            Class.forName("org.apache.derby.jdbc.ClientDriver");
+        	/*
+        	Class.forName("org.apache.derby.jdbc.ClientDriver");
             conn = DriverManager.getConnection("jdbc:derby://localhost:1527/db4243");
             
             String sql = "SELECT USER_ID, DEADLINE, DETAILS, "
@@ -48,14 +48,23 @@ public class DeadlineDAO {
                 deadline = new DeadLine(rs.getInt("USER_ID"),rs.getDate("DEADLINE"),rs.getString("DETAILS"));
                 deadlineList.add(deadline);
             }
+            */
+        	
+        	deadlineList = (List<DeadLine>) manager.newQuery("select from " + DeadLine.class.getName()).execute();
+        	
+        /*
         }catch(SQLException e){
             e.printStackTrace();
             return null;
         }catch(ClassNotFoundException e){
             e.printStackTrace();
             return null;
+        */
+        }catch(JDOObjectNotFoundException e){
+        	System.out.println(e);
         }finally{
-            if(conn!=null){
+            /*
+        	if(conn!=null){
                 try{
                     conn.close();
                 }catch(SQLException e){
@@ -63,6 +72,8 @@ public class DeadlineDAO {
                     return null;
                 }
             }
+            */
+        	manager.close();
             session.setAttribute("deadlineList", deadlineList);
         }
         return deadlineList;
