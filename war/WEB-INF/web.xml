@@ -10,7 +10,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>WelcomeServlet</servlet-name>
-		<url-pattern>/WelcomeServlet</url-pattern>
+		<url-pattern>/ad4243/WelcomeServlet</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>RegistServlet</servlet-name>
@@ -18,7 +18,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>RegistServlet</servlet-name>
-		<url-pattern>/RegistServlet</url-pattern>
+		<url-pattern>/ad4243/RegistServlet</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>MainServlet</servlet-name>
@@ -26,7 +26,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>MainServlet</servlet-name>
-		<url-pattern>/MainServlet</url-pattern>
+		<url-pattern>/ad4243/MainServlet</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>LoginServlet</servlet-name>
@@ -34,7 +34,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>LoginServlet</servlet-name>
-		<url-pattern>/LoginServlet</url-pattern>
+		<url-pattern>/ad4243/LoginServlet</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>LogoutServlet</servlet-name>
@@ -42,7 +42,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>LogoutServlet</servlet-name>
-		<url-pattern>/LogoutServlet</url-pattern>
+		<url-pattern>/ad4243/LogoutServlet</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>GachaServlet</servlet-name>
@@ -50,7 +50,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>GachaServlet</servlet-name>
-		<url-pattern>/GachaServlet</url-pattern>
+		<url-pattern>/ad4243/GachaServlet</url-pattern>
 	</servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>WelcomeServlet</welcome-file>
