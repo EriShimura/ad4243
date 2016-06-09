@@ -6,7 +6,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.Vector;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +16,8 @@ import com.application.ad4243.model.Card;
 import com.application.ad4243.model.User;
 //import org.apache.tomcat.dbcp.dbcp.DelegatingPreparedStatement;
 
+import javax.jdo.*;
+
 /**
  *
  * @author g13943se
@@ -23,13 +25,19 @@ import com.application.ad4243.model.User;
 public class CardListDAO {
     public boolean findCards(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println("cardListDAO - start");
+        //System.out.println("cardListDAO - start"); // debug
         HttpSession session = request.getSession();
         User nowUser = (User) session.getAttribute("user");
-        ArrayList<Card> cardList = new ArrayList<Card>();
+        List<Card> cardList = new ArrayList<Card>();
+        List<Card> allCard = new ArrayList<Card>();
         Card card = null;
-        Connection conn = null;
+        
+        PersistenceManagerFactory factory = PMF.get();
+        PersistenceManager manager = factory.getPersistenceManager();
+        
+        //Connection conn = null;
         try{
+        	/*
             Class.forName("org.apache.derby.jdbc.ClientDriver");
             conn = DriverManager.getConnection("jdbc:derby://localhost:1527/db4243");
             
@@ -46,6 +54,18 @@ public class CardListDAO {
                 cardList.add(card);
                 System.out.println("find card - ["+card.getCardId()+":"+card.getCardName()+"]");
             }
+            */
+        	
+        	// とりあえず全部カードもってくる
+        	allCard = (List<Card>) manager.newQuery("select from "+Card.class.getName());
+        	
+        	// nowUserのIDが含まれてるオーナー情報を持ったカードをcardListに追加
+        	for(Card c : allCard)
+        		if(c.getCardOwner().indexOf(nowUser.getUserId()) != -1) cardList.add(c);
+        	
+        }catch(JDOObjectNotFoundException e){
+        	e.printStackTrace();
+        /*
         }catch(SQLException e){
             e.printStackTrace();
             System.out.println("ERR01");
@@ -54,8 +74,10 @@ public class CardListDAO {
             e.printStackTrace();
             System.out.println("ERR02");
             return false;
+            */
         }finally{
-            if(conn!=null){
+            /*
+        	if(conn!=null){
                 try{
                     conn.close();
                 }catch(SQLException e){
@@ -63,6 +85,8 @@ public class CardListDAO {
                     return false;
                 }
             }
+            */
+        	manager.close();
             session.setAttribute("cardList", cardList);
         }
         return true;

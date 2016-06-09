@@ -6,7 +6,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.*;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,13 +23,14 @@ public class AllCardListDAO {
     public boolean findAllCards(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        ArrayList<Card> allCard = new ArrayList<Card>();
+        List<Card> allCard = new ArrayList<Card>();
         Card card = null;
-        Connection conn = null;
+        //Connection conn = null;
         PersistenceManagerFactory factory = PMF.get();
         PersistenceManager manager = factory.getPersistenceManager();
         try{
-            Class.forName("org.apache.derby.jdbc.ClientDriver");
+            /*
+        	Class.forName("org.apache.derby.jdbc.ClientDriver");
             conn = DriverManager.getConnection("jdbc:derby://localhost:1527/db4243");
             
             String sql = "SELECT * FROM CARD_LIST";           
@@ -51,8 +52,13 @@ public class AllCardListDAO {
             e.printStackTrace();
             System.out.println("ERR02");
             return false;
+            */
+        	
+        	allCard = (List<Card>) manager.newQuery("select from"+Card.class.getName());
+        	
         }finally{
-            if(conn!=null){
+            /*
+        	if(conn!=null){
                 try{
                     conn.close();
                 }catch(SQLException e){
@@ -60,6 +66,8 @@ public class AllCardListDAO {
                     return false;
                 }
             }
+            */
+        	manager.close();
             session.setAttribute("allCardList", allCard);
         }
         return true;

@@ -11,7 +11,7 @@ Vector を　ArrayList　に変更
 
 
 <%@page import="java.util.ArrayList"%>
-<%@page import="model.Card"%>
+<%@page import="com.application.ad4243.model.Card"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
     ArrayList<Card> cardList = (ArrayList<Card>) session.getAttribute("cardList");
