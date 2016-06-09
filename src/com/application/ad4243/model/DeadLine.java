@@ -11,7 +11,6 @@ import javax.jdo.annotations.*;
 public class DeadLine {
 	
 	@PrimaryKey
-	@Persistent
     int userId;
 	
 	@Persistent
