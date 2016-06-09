@@ -9,6 +9,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.application.ad4243.dao.PMF;
+import com.application.ad4243.model.*;
+
+import javax.jdo.*;
+
 /**
  *
  * @author g13943se
@@ -31,6 +36,18 @@ public class WelcomeServlet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         String userName = (String) session.getAttribute("userName");
+        
+        /////////////////////
+        // DATA STORE TEST //
+        /////////////////////
+        PersistenceManagerFactory factory = PMF.get();
+        PersistenceManager manager = factory.getPersistenceManager();
+        
+        try{
+        	manager.makePersistent(new User(99, "fushide", "fushide", 500));
+        }finally{ manager.close(); }
+        /////////////////////
+        
         if(userName!=null){
             RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/main.jsp");
             dispatcher.forward(request, response);

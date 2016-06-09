@@ -1,13 +1,24 @@
 package com.application.ad4243.model;
 
+import javax.jdo.annotations.*;
+
 /**
 *
 * @author g13943se
 */
+@PersistenceCapable(identityType =IdentityType.APPLICATION)
 public class User {
+	@PrimaryKey
+	@Persistent
    private int userId;
+	
+	@Persistent
    private String pass;
+	
+	@Persistent
    private String name;
+	
+	@Persistent
    private int point;
 
    public User(int userId,String pass,String name,int point){
