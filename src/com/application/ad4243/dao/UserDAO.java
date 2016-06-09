@@ -71,7 +71,7 @@ public class UserDAO {
         PersistenceManagerFactory factory = PMF.get();
         PersistenceManager manager = factory.getPersistenceManager();
         try{
-        	user = (User) manager.getObjectById(User.class, );
+        	user = (User) manager.getObjectById(User.class, 910); // とりあえず固定
         }finally{
         	manager.close();
         }
