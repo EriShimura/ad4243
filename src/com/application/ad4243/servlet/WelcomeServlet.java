@@ -39,13 +39,32 @@ public class WelcomeServlet extends HttpServlet {
         
         /////////////////////
         // DATA STORE TEST //
+        // --------------- //
+        // result: OK      //
         /////////////////////
+        
         PersistenceManagerFactory factory = PMF.get();
         PersistenceManager manager = factory.getPersistenceManager();
         
+        /* 
+        // make data
         try{
-        	manager.makePersistent(new User(99, "fushide", "fushide", 500));
+        	manager.makePersistent(new User(910, "fushide", "fushide", 500));
         }finally{ manager.close(); }
+        */
+        
+        
+        // load data
+        /*
+        try{
+        	User testUser = manager.getObjectById(User.class, 910);
+        	System.out.println("LOAD USER:"+testUser.getName()+"(ID:"+testUser.getUserId()+")");
+        }catch(JDOObjectNotFoundException e){
+        	e.printStackTrace();
+        }finally{
+        	manager.close();
+        }
+        */
         /////////////////////
         
         if(userName!=null){

@@ -9,7 +9,6 @@ import javax.jdo.annotations.*;
 @PersistenceCapable(identityType =IdentityType.APPLICATION)
 public class User {
 	@PrimaryKey
-	@Persistent
    private int userId;
 	
 	@Persistent

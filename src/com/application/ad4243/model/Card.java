@@ -9,7 +9,6 @@ import javax.jdo.annotations.*;;
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
 public class Card {
 	@PrimaryKey
-	@Persistent
    int cardId;
 	
 	@Persistent
