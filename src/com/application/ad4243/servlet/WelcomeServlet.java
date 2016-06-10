@@ -1,6 +1,7 @@
 package com.application.ad4243.servlet;
 
 import java.io.IOException;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 //import javax.servlet.annotation.WebServlet;
@@ -11,6 +12,9 @@ import javax.servlet.http.HttpSession;
 
 import com.application.ad4243.dao.PMF;
 import com.application.ad4243.model.*;
+
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 
 import javax.jdo.*;
 
@@ -35,7 +39,10 @@ public class WelcomeServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        String userName = (String) session.getAttribute("userName");
+        //String userName = (String) session.getAttribute("userName");
+        UserService userService = UserServiceFactory.getUserservice();
+        String thisUrl = request.getRequestURI();
+        response.setContentType("text/html")
         
         /////////////////////
         // DATA STORE TEST //
@@ -48,12 +55,21 @@ public class WelcomeServlet extends HttpServlet {
         }finally{ manager.close(); }
         /////////////////////
         
-        if(userName!=null){
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/main.jsp");
-            dispatcher.forward(request, response);
+        /*if(userName!=null){
+           RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/main.jsp");
+           dispatcher.forward(request, response);
+             
         }else{
             RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/welcome.jsp");
             dispatcher.forward(request, response);
+        }
+        */
+        if(req.getUserPrincipal()!=null){
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/main.jsp");
+            dispatcher.forward(request, response); 
+        }else{
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/welcome.jsp");
+            dispatcher.forward(request, response);    	
         }
     }
 
