@@ -32,4 +32,7 @@ public class User {
    public String getName(){ return name; }
    public int getPoint(){ return point; }
    public void setPoint(int point){ this.point = point; }
+   public void setPass(String pass){ this.pass = pass; }
+   public void setName(String name){ this.name = name; }
+   public void setUserId(int userId){ this.userId = userId; }
 }

@@ -32,4 +32,9 @@ public class DeadLine {
         deadlineId = userId * (int) details.charAt(0); // wei!!!!!!
     }
     public String getDetails(){ return details; }
+    public long getDeadlineId(){ return deadlineId; }
+    public int getUserId(){ return userId; }
+    public Date getDeadline(){ return deadline; }
+    public void setDetails(String details){ this.details = details; }
+    public void setDeadlineId(long deadlineId){ this.deadlineId = deadlineId; }
 }

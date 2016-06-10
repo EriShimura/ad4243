@@ -24,9 +24,8 @@ public class UserDAO {
             throws ServletException, IOException {
     	// Connection conn = null;
         User user = null;
-        //////////////////////
-        /* software
-        //////////////////////
+        
+        /* 
         try{
             Class.forName("org.apache.derby.jdbc.ClientDriver");
             conn = DriverManager.getConnection("jdbc:derby://localhost:1527/db4243");
@@ -71,7 +70,7 @@ public class UserDAO {
         PersistenceManagerFactory factory = PMF.get();
         PersistenceManager manager = factory.getPersistenceManager();
         try{
-        	user = (User) manager.getObjectById(User.class, 910); // とりあえず固定
+        	user = (User) manager.getObjectById(User.class, 0); // とりあえず固定
         }finally{
         	manager.close();
         }
