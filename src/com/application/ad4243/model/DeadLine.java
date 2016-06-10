@@ -36,5 +36,4 @@ public class DeadLine {
     public int getUserId(){ return userId; }
     public Date getDeadline(){ return deadline; }
     public void setDetails(String details){ this.details = details; }
-    public void setDeadlineId(long deadlineId){ this.deadlineId = deadlineId; }
 }
