@@ -54,7 +54,7 @@ public class AllCardListDAO {
             return false;
             */
         	
-        	allCard = (List<Card>) manager.newQuery("select from"+Card.class.getName());
+        	allCard = (List<Card>) manager.newQuery("select from "+Card.class.getName());
         	
         }finally{
             /*
