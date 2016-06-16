@@ -83,14 +83,13 @@ public class UserDAO {
         	userList = (List<User>) manager.newQuery(queryS).execute();
         	for(User u:userList){
         		if(u.getPass().equals(login.getPass()) && u.getName().equals(login.getUserName())) // nameもpassもあってるか？
-        			{ user = u; break; }
-        	}
+       				{ user = u; break; }
+       		}
         }catch(JDOObjectNotFoundException e){
         	e.printStackTrace();
-    	}finally{	
-        	manager.close();
-        }
+    	}
         
+        manager.close();
         return user;
     }
 }
