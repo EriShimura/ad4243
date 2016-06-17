@@ -40,19 +40,21 @@ public class WelcomeServlet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         //String userName = (String) session.getAttribute("userName");
-        UserService userService = UserServiceFactory.getUserservice();
+        UserService userService = UserServiceFactory.getUserService();
         String thisUrl = request.getRequestURI();
-        response.setContentType("text/html")
+        response.setContentType("text/html");
         
         /////////////////////
         // DATA STORE TEST //
         /////////////////////
+        /*
         PersistenceManagerFactory factory = PMF.get();
         PersistenceManager manager = factory.getPersistenceManager();
         
         try{
         	manager.makePersistent(new User(99, "fushide", "fushide", 500));
         }finally{ manager.close(); }
+        */
         /////////////////////
         
         /*if(userName!=null){
@@ -64,7 +66,7 @@ public class WelcomeServlet extends HttpServlet {
             dispatcher.forward(request, response);
         }
         */
-        if(req.getUserPrincipal()!=null){
+        if(request.getUserPrincipal()!=null){
             RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/main.jsp");
             dispatcher.forward(request, response); 
         }else{
