@@ -12,12 +12,22 @@ import javax.servlet.http.HttpSession;
 import com.application.ad4243.dao.PMF;
 import com.application.ad4243.model.*;
 
-import javax.jdo.*;
+import com.google.appengine.api.users.*;
 
 /**
  *
  * @author g13943se
  */
+
+////////////////////////////////////
+// WelcomeServlet
+// -------------------------------
+// ・一番始めにアクセスする場所
+// ・ログインしてあるかどうかで、ログイン画面にいくか直接mainに行くか決めている
+// [2016-06-21]
+// ・ログインしてあるかどうかをGoogleのUserServiceを利用する形に変更
+////////////////////////////////////
+
 //@WebServlet(name = "WelcomeServlet", urlPatterns = {"/WelcomeServlet"})
 public class WelcomeServlet extends HttpServlet {
 
@@ -35,44 +45,17 @@ public class WelcomeServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        String userName = (String) session.getAttribute("userName");
+        UserService service = UserServiceFactory.getUserService();
         
-        /////////////////////
-        // DATA STORE TEST //
-        // --------------- //
-        // result: OK      //
-        /////////////////////
-        
-        PersistenceManagerFactory factory = PMF.get();
-        PersistenceManager manager = factory.getPersistenceManager();
-        
-        /* 
-        // make data
-        try{
-        	manager.makePersistent(new User(910, "fushide", "fushide", 500));
-        }finally{ manager.close(); }
-        */
-        
-        
-        // load data
-        /*
-        try{
-        	User testUser = manager.getObjectById(User.class, 910);
-        	System.out.println("LOAD USER:"+testUser.getName()+"(ID:"+testUser.getUserId()+")");
-        }catch(JDOObjectNotFoundException e){
-        	e.printStackTrace();
-        }finally{
-        	manager.close();
-        }
-        */
-        /////////////////////
-        
-        if(userName!=null){
+        if(service.isUserLoggedIn()){ // ログインしてある!
+        	session.setAttribute("user", service.getCurrentUser()); // ログイン情報をセッションへ
+        	session.setAttribute("userName", service.getCurrentUser().getNickname()); // userNameの所にアカウントネームを
             RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/main.jsp");
-            dispatcher.forward(request, response);
-        }else{
+            dispatcher.forward(request, response); // main.jspへformard
+        }else{ // ログインされていない
+        	session.removeAttribute("user"); session.removeAttribute("userName"); // セッションのuserを削除
             RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/welcome.jsp");
-            dispatcher.forward(request, response);
+            dispatcher.forward(request, response); // welcome.jspへformard
         }
     }
 

@@ -11,10 +11,21 @@ import javax.servlet.http.HttpSession;
 import com.application.ad4243.model.Login;
 import com.application.ad4243.model.LoginLogic;
 
+import com.google.appengine.api.users.*;
+
 /**
  *
  * @author g13943se
  */
+
+/////////////////////////////////
+// LoginServlet
+// ---------------------------
+// ・ログイン処理担当
+// [2016-06-21]
+// ・ログイン処理をGoogleのUserServiceに変更するため、現在はGoogleログインページへの橋渡しのみ
+/////////////////////////////////
+
 //@WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
 public class LoginServlet extends HttpServlet {
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -30,8 +41,19 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/login.jsp");
-        dispatcher.forward(request, response);
+    	// welcome.jspからきた場合
+    	// ログイン情報入力画面へforward
+    	// [2016-06-21]
+    	// googleログイン画面へforward
+        
+    	// ----以下、以前使用していたコード----
+    	// RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/login.jsp");
+    	// dispatcher.forward(request, response);
+    	// ------------------------------
+    	
+    	UserService service = UserServiceFactory.getUserService();
+        String loginurl = service.createLoginURL("/ad4243/WelcomeServlet"); // ログイン終わったらはじめのWelcomeServletへ行くログインURL取得
+        response.sendRedirect(loginurl); // GO!!
     }
 
     /**
@@ -46,9 +68,18 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+    	// login.jspにて情報入力後はここにくる
+    	// 入力情報はParameterにて
+    	// [2016-06-21]
+    
+    	// ***[現在このメソッドは使われておりません(Googleアカウントでのログイン処理をしているため)]***
+    	
+    	response.sendRedirect("/ad4243/LoginServlet"); // 念のため間違ってこっちきちゃったらGETメソッドの方に流す
+    	
+    	/*
         request.setCharacterEncoding("UTF-8");
-        String userName = request.getParameter("userName");
-        String pass = request.getParameter("pass");
+        String userName = request.getParameter("userName"); // userNameを取得
+        String pass = request.getParameter("pass"); // passを取得
         
         Login login = new Login(userName,pass);
         LoginLogic bo = new LoginLogic();
@@ -64,6 +95,8 @@ public class LoginServlet extends HttpServlet {
         }else{
             response.sendRedirect("/ad4243/LoginServlet");
         }
+        */
+    	
     }
 
     /**

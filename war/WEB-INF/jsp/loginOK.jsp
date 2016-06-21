@@ -4,6 +4,8 @@
     Author     : g13943se
 --%>
 
+<!-- [2016-06-21]現在不使用 -->
+
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%
 String userName = (String) session.getAttribute("userName");

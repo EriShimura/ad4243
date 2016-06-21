@@ -10,10 +10,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.google.appengine.api.users.*;
+
 /**
  *
  * @author g13943se
  */
+
+/////////////////////////////////
+// LogoutServlet
+// ---------------------------
+// ・ログアウト処理担当
+// [2016-06-21]
+// ・処理をGoogleのUserServiceをはさむような形に変更
+/////////////////////////////////
+
 //@WebServlet(name = "LogoutServlet", urlPatterns = {"/LogoutServlet"})
 public class LogoutServlet extends HttpServlet {
 
@@ -31,11 +42,22 @@ public class LogoutServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        session.invalidate();
         
-        RequestDispatcher dispatcher = 
-                request.getRequestDispatcher("/WEB-INF/jsp/logout.jsp");
-        dispatcher.forward(request, response);
+        if(session.getAttribute("user")!=null){ // ログアウトし終わっていなかったら
+        	session.invalidate(); // セッション内を全部解放
+        
+        	UserService service = UserServiceFactory.getUserService();
+        	response.sendRedirect(service.createLogoutURL("/ad4243/LogoutServlet"));
+        }else{ // ログアウト後だったら
+        	RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/logout.jsp");
+        	dispatcher.forward(request, response);
+        }
+        
+        // ----[以下以前使用していたコード]----
+        // RequestDispatcher dispatcher = 
+        // request.getRequestDispatcher("/WEB-INF/jsp/logout.jsp");
+        // dispatcher.forward(request, response);
+        // ------------------------------
     }
 
     /**

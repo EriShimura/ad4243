@@ -4,6 +4,17 @@
     Author     : g13943se
 --%>
 
+<!-- 
+[2016-06-21]
+どうやらGoogleのUserServiceを使うとよくわからんメアドでもログインができるようだ。
+なのではじめての方はこちらをなくそうと思う…。
+以下になくした分のコードを書いておく。もしまた会員登録が必要になったら活用してほしい。
+~Mr.Smith~
+
+<li><a href="/ad4243/RegistServlet">はじめての方はこちら</a>(ユーザー登録)</li>
+(body-ul内に埋め込み)
+-->
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -14,7 +25,6 @@
     <body>
         <ul>
             <li><a href="/ad4243/LoginServlet">ログイン</a></li>
-            <li><a href="/ad4243/RegistServlet">はじめての方はこちら</a>(ユーザー登録)</li>
         </ul>
     </body>
 </html>
