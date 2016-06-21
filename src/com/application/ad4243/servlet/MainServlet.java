@@ -16,6 +16,13 @@ import com.application.ad4243.model.DeadlineLogic;
  *
  * @author g13943se
  */
+
+////////////////////////////////////
+// MainServlet
+// -------------------------------
+// ・main.jspからの指令を受けてそれぞれのページに飛ばす
+////////////////////////////////////
+
 //@WebServlet(name = "MainServlet", urlPatterns = {"/MainServlet"})
 public class MainServlet extends HttpServlet {
 
@@ -32,18 +39,28 @@ public class MainServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String doing = request.getParameter("do");
-        if(doing.equals("getpoint")){
+    	String doing = request.getParameter("do"); // どこに行くべきかの指令を受け取る
+        
+    	// ===[getpoint(ポイント付与)の場合]===
+    	if(doing.equals("getpoint")){
+    		// forwardするだけ(今は？)
             RequestDispatcher dispatcher = 
                 request.getRequestDispatcher("/WEB-INF/jsp/getPoint.jsp");
             dispatcher.forward(request, response);
-        }else if(doing.equals("gacha")){
+       
+    	// ===[gacha(ガチャ)の場合]===
+    	}else if(doing.equals("gacha")){
+    		// forwardするだけ(今は)
             RequestDispatcher dispatcher = 
                 request.getRequestDispatcher("/WEB-INF/jsp/gacha.jsp");
             dispatcher.forward(request, response);
-        }else if(doing.equals("cardlist")){
-            CardListLogic cll = new CardListLogic();
+        
+        // ===[cardlist(カード一覧表示)の場合]===
+    	}else if(doing.equals("cardlist")){
+    		// カード一覧をLogic経由のDAOでsessionに保存？
+    		CardListLogic cll = new CardListLogic();
             boolean result = cll.execute(request, response);
+            // 成功かどうかで移動先を変える
             if(result){
                 RequestDispatcher dispatcher = 
                     request.getRequestDispatcher("/WEB-INF/jsp/cardList.jsp");
@@ -53,9 +70,13 @@ public class MainServlet extends HttpServlet {
                     request.getRequestDispatcher("/WEB-INF/jsp/error.jsp");
                 dispatcher.forward(request, response);
             }
+        
+        // ===[deadline(締切登録・管理)の場合]===
         }else if(doing.equals("deadline")){
+        	// 締切一覧をLogic経由のDAOでsessionに保存
             DeadlineLogic dll = new DeadlineLogic();
             boolean result = dll.execute(request, response);
+            // 成功かどうかで移動先を決める
             if(result){
                 RequestDispatcher dispatcher = 
                     request.getRequestDispatcher("/WEB-INF/jsp/deadline.jsp");
