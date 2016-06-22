@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.application.ad4243.dao.PMF;
+import com.application.ad4243.dao.*;
 import com.application.ad4243.model.*;
 
 import com.google.appengine.api.users.*;
@@ -48,7 +48,9 @@ public class WelcomeServlet extends HttpServlet {
         UserService service = UserServiceFactory.getUserService();
         
         if(service.isUserLoggedIn()){ // ログインしてある!
-        	session.setAttribute("user", service.getCurrentUser()); // ログイン情報をセッションへ
+        	if(!(new LoginLogic().execute(service.getCurrentUser().getNickname(), request, response))){ // ログイン失敗（登録されていない）場合
+        		new RegistDAO().registUser(service.getCurrentUser().getNickname()); // userを登録
+        	}
         	session.setAttribute("userName", service.getCurrentUser().getNickname()); // userNameの所にアカウントネームを
             RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/main.jsp");
             dispatcher.forward(request, response); // main.jspへformard

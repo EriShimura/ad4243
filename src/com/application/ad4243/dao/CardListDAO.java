@@ -59,9 +59,9 @@ public class CardListDAO {
         	// とりあえず全部カードもってくる
         	allCard = (List<Card>) manager.newQuery("select from "+Card.class.getName());
         	
-        	// nowUserのIDが含まれてるオーナー情報を持ったカードをcardListに追加
+        	// nowUserのnameが含まれてるオーナー情報を持ったカードをcardListに追加
         	for(Card c : allCard)
-        		if(c.getCardOwner().indexOf(nowUser.getUserId()) != -1) cardList.add(c);
+        		if(c.getCardOwner().indexOf(nowUser.getName()) != -1) cardList.add(c);
         	
         }catch(JDOObjectNotFoundException e){
         	e.printStackTrace();

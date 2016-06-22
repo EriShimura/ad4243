@@ -17,7 +17,7 @@ import javax.jdo.*;
  * @author g13943se
  */
 public class SetCardDAO {
-    public boolean setNewCard(HttpServletRequest request, HttpServletResponse response, Card newCard, int owner)
+    public boolean setNewCard(HttpServletRequest request, HttpServletResponse response, Card newCard, String owner)
             throws ServletException, IOException {
         /*
        	Connection conn = null;

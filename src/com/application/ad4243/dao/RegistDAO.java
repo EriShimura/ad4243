@@ -20,7 +20,7 @@ import javax.jdo.*;
  * @author g13943se
  */
 public class RegistDAO {
-    public boolean registUser(String pass,String userName){
+    public boolean registUser(String userName){
     	
     	
         /*Connection conn = null;
@@ -56,7 +56,7 @@ public class RegistDAO {
     	PersistenceManagerFactory factory = PMF.get();
     	PersistenceManager manager = factory.getPersistenceManager();
     	try{
-    		User registUser = new User(PMF.getNextUserId(), pass, userName, 0);
+    		User registUser = new User(userName, 0);
     		manager.makePersistent(registUser);
     	}finally{
     		manager.close();

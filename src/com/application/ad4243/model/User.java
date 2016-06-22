@@ -9,27 +9,31 @@ import java.net.URL;
 */
 @PersistenceCapable(identityType =IdentityType.APPLICATION)
 public class User {
+	/* IDとしてnameを使う。
 	@PrimaryKey
 	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
-   private int userId;
+   private Long userId;
+	*/
 	
+	/* Googleがやってくれるならパスワードはいらない
 	@Persistent
    private String pass;
+   */
 	
-	@Persistent
+	@PrimaryKey
    private String name;
 	
 	@Persistent
    private int point;
 
-   public User(int userId,String pass,String name,int point){
-       this.userId = userId;
-       this.pass = pass;
+   public User(/*Long userId, String pass,*/String name,int point){
+       //this.userId = userId;
+       //this.pass = pass;
        this.name = name;
        this.point = point;
    }
-   public int getUserId(){ return userId; }
-   public String getPass(){ return pass; }
+  // public Long getUserId(){ return userId; }
+   //public String getPass(){ return pass; }
    public String getName(){ return name; }
    public int getPoint(){ return point; }
    public void setPoint(int point){ this.point = point; }

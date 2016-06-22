@@ -22,7 +22,7 @@ import javax.servlet.http.*;
  * @author g13943se
  */
 public class UserDAO {
-    public User findByLogin(Login login,HttpServletRequest request, HttpServletResponse response)
+    public User findByLogin(String userName,HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     	// Connection conn = null;
         User user = null;
@@ -82,7 +82,7 @@ public class UserDAO {
         	String queryS = "select from "+User.class.getName();
         	userList = (List<User>) manager.newQuery(queryS).execute();
         	for(User u:userList){
-        		if(u.getPass().equals(login.getPass()) && u.getName().equals(login.getUserName())) // nameもpassもあってるか？
+        		if(u.getName().equals(userName)) // nameもpassもあってるか？
        				{ user = u; break; }
        		}
         }catch(JDOObjectNotFoundException e){

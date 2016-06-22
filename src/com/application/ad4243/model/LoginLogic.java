@@ -11,10 +11,10 @@ import javax.servlet.http.HttpServletResponse;
  * @author g13943se
  */
 public class LoginLogic {
-    public boolean execute(Login login,HttpServletRequest request, HttpServletResponse response)
+    public boolean execute(String loginName,HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         UserDAO dao = new UserDAO();
-        User user = dao.findByLogin(login,request,response);
+        User user = dao.findByLogin(loginName,request,response);
         return user != null;
     }
 }
