@@ -14,6 +14,8 @@ import com.application.ad4243.model.Login;
 import com.application.ad4243.model.User;
 
 import javax.jdo.*;
+import java.util.*;
+import javax.servlet.http.*;
 
 /**
  *
@@ -24,9 +26,8 @@ public class UserDAO {
             throws ServletException, IOException {
     	// Connection conn = null;
         User user = null;
-        //////////////////////
-        /* software
-        //////////////////////
+        
+        /* 
         try{
             Class.forName("org.apache.derby.jdbc.ClientDriver");
             conn = DriverManager.getConnection("jdbc:derby://localhost:1527/db4243");
@@ -71,11 +72,24 @@ public class UserDAO {
         PersistenceManagerFactory factory = PMF.get();
         PersistenceManager manager = factory.getPersistenceManager();
         try{
-        	user = (User) manager.getObjectById(User.class, 910); // とりあえず固定
-        }finally{
-        	manager.close();
-        }
+        	List<User> userList = null;
+        	
+        	//userList = (List<User>) manager.newQuery("select from "+User.class.getName()).execute();
+        	
+        	//Query query = manager.newQuery(User.class);
+        	//userList = (List<User>) query.execute();
+        	
+        	String queryS = "select from "+User.class.getName();
+        	userList = (List<User>) manager.newQuery(queryS).execute();
+        	for(User u:userList){
+        		if(u.getPass().equals(login.getPass()) && u.getName().equals(login.getUserName())) // nameもpassもあってるか？
+       				{ user = u; break; }
+       		}
+        }catch(JDOObjectNotFoundException e){
+        	e.printStackTrace();
+    	}
         
+        manager.close();
         return user;
     }
 }

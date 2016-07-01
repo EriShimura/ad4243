@@ -1,6 +1,7 @@
 package com.application.ad4243.model;
 
 import javax.jdo.annotations.*;
+import java.net.URL;
 
 /**
 *
